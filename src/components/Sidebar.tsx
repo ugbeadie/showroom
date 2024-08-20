@@ -19,7 +19,6 @@ const Sidebar = () => {
     setMinPrice,
     maxPrice,
     setMaxPrice,
-    keyword,
     setKeyword,
   } = useFilter();
 
@@ -36,7 +35,7 @@ const Sidebar = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch("https://dummyjson.com/product");
+        const res = await fetch("https://dummyjson.com/products");
         const data: FetchResponse = await res.json();
         const uniqueCategories = Array.from(
           new Set(data.products.map((p) => p.category))
