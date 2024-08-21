@@ -41,11 +41,30 @@ const MainContent = () => {
         (product) => product.price >= minPrice
       );
     }
+    if (maxPrice !== undefined) {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.price <= maxPrice
+      );
+    }
+    if (query) {
+      filteredProducts = filteredProducts.filter((product) =>
+        product.title.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+    switch (filter) {
+      case "cheap":
+        return filteredProducts.sort((a, b) => a.price - b.price);
+      case "expensive":
+        return filteredProducts.sort((a, b) => b.price - a.price);
+      case "popular":
+        return filteredProducts.sort((a, b) => b.rating - a.rating);
+      default:
+        return filteredProducts;
+    }
   };
+  const filteredProducts = getFilteredProducts();
 
-  //   getFilteredProducts();
-
-  //   const filteredProducts = getFilteredProducts();
+  console.log(filteredProducts);
 
   return (
     <section className="xl:w-[55rem] lg:w-[55rem] sm:w-[40rem] xs:w-[20rem]">
