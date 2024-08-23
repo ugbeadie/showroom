@@ -10,6 +10,7 @@ function App() {
         <div className="rounded w-full flex justify-between flex-wrap">
           <Routes>
             <Route path="/" element={<MainContent />} />
+            <Route path="/product/id" element={<MainContent />} />
           </Routes>
         </div>
       </div>

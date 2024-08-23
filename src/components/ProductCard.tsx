@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 type ProductCardType = {
@@ -6,9 +5,10 @@ type ProductCardType = {
   title: string;
   image: string;
   price: number;
+  rating: number;
 };
 
-const ProductCard = ({ id, title, image, price }: ProductCardType) => {
+const ProductCard = ({ id, title, image, price, rating }: ProductCardType) => {
   return (
     <div className="border p-4 rounded">
       <Link to={`/product/${id}`}>
@@ -19,6 +19,9 @@ const ProductCard = ({ id, title, image, price }: ProductCardType) => {
         />
         <h2 className="font-bold">{title}</h2>
         <p>${price}</p>
+        <h3>
+          rating: <span className="text-yellow-400">{rating}</span>
+        </h3>
       </Link>
     </div>
   );
