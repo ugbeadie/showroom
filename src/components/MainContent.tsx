@@ -64,8 +64,31 @@ const MainContent = () => {
     }
   };
   const filteredProducts = getFilteredProducts();
-
   console.log(filteredProducts);
+
+  const totalProducts = 100;
+  const totalPages = Math.ceil(totalProducts / productsPerPage);
+
+  const handlePageChange = (page: number) => {
+    if (page > 0 && page <= totalPages) setCurrentPage(page);
+  };
+
+  const getPaginationButtons = () => {
+    const buttons: number[] = [];
+    let startPage = Math.max(1, currentPage - 2);
+    let endPage = Math.min(totalPages, currentPage + 2);
+
+    if (currentPage - 2 < 1) {
+      endPage = Math.min(totalPages, endPage + (2 - currentPage - 1));
+    }
+    if (currentPage + 2 > totalPages) {
+      startPage = Math.min(1, startPage - (2 - totalPages - currentPage));
+    }
+    for (let page = startPage; page <= endPage; page++) {
+      buttons.push(page);
+    }
+    return buttons;
+  };
 
   return (
     <section className="xl:w-[55rem] lg:w-[55rem] sm:w-[40rem] xs:w-[20rem]">
@@ -113,6 +136,36 @@ const MainContent = () => {
               price={product.price}
             />
           ))}
+        </div>
+
+        <div className="flex flex-col sm:flex-row justify-between items-center mt-5">
+          <button
+            disabled={currentPage === 1}
+            onClick={() => handlePageChange(currentPage - 1)}
+            className="border px-4 py-2 mx-2 rounded-full"
+          >
+            Prev
+          </button>
+          <div className="flex flex-wrap justify-center">
+            {getPaginationButtons().map((page) => (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`border px-4 py-2 mx-1 rounded-full ${
+                  page === currentPage ? "bg-black text-white" : ""
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+          </div>
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => handlePageChange(currentPage + 1)}
+            className="border px-4 py-2 mx-2 rounded-full"
+          >
+            Next
+          </button>
         </div>
       </div>
     </section>
