@@ -64,7 +64,6 @@ const MainContent = () => {
     }
   };
   const filteredProducts = getFilteredProducts();
-  console.log(filteredProducts);
 
   const totalProducts = 100;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
